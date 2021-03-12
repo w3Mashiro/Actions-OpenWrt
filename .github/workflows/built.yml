@@ -76,7 +76,7 @@ jobs:
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
     - name: Update & Install feeds
-      run: cd openwrt && git clone https://github.com/kuoruan/openwrt-v2ray.git package/v2ray-core &&./scripts/feeds update -a && ./scripts/feeds install -a
+      run: cd openwrt &&./scripts/feeds update -a && ./scripts/feeds install -a
 
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0
