@@ -19,7 +19,7 @@ on:
         required: true
         default: 'true'
       branch:
-        description: '1 for snapshot,2 for release'
+        description: '1 for snapshot,2 for release,3 for old release'
         required: true
         default: '1'
 
@@ -27,6 +27,7 @@ env:
   REPO_URL: https://github.com/openwrt/openwrt.git
   REPO_BRANCH: v19.07.7
   REPO_BRANCH2: master
+  REPO_BRANCH3: v18.06.9
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: .config
   DIY_P1_SH: diy-part1.sh
@@ -61,15 +62,23 @@ jobs:
 
     - name: Clone release source code
       working-directory: /workdir
-      if: (github.event.inputs.branch == '2' && github.event.inputs.branch  != '1') || contains(github.event.action, 'branch')
+      if: (github.event.inputs.branch == '2') || contains(github.event.action, 'branch')
       run: |
         df -hT $PWD
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         
+    - name: Clone old release source code
+      working-directory: /workdir
+      if: (github.event.inputs.branch == '3') || contains(github.event.action, 'branch')
+      run: |
+        df -hT $PWD
+        git clone $REPO_URL -b $REPO_BRANCH3 openwrt
+        ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
+        
     - name: Clone snapshot source code
       working-directory: /workdir
-      if: (github.event.inputs.branch == '1' && github.event.inputs.branch  != '2') || contains(github.event.action, 'branch')
+      if: (github.event.inputs.branch == '1') || contains(github.event.action, 'branch')
       run: |
         df -hT $PWD
         git clone $REPO_URL -b $REPO_BRANCH2 openwrt
