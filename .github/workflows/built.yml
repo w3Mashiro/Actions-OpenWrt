@@ -19,7 +19,7 @@ on:
         required: true
         default: 'true'
       branch:
-        description: '1 for snapshot,2 for release,3 for old release'
+        description: '1 for openwrt-21.02, 2 for v19.07.7, 3 for v18.06.9, 4 for LEDE'
         required: true
         default: '1'
 
@@ -28,6 +28,7 @@ env:
   REPO_BRANCH: v19.07.7
   REPO_BRANCH2: openwrt-21.02
   REPO_BRANCH3: v18.06.9
+  LEDE_BRANCH: https://github.com/coolsnowwolf/lede.git -b master
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: .config
   DIY_P1_SH: diy-part1.sh
@@ -82,6 +83,14 @@ jobs:
       run: |
         df -hT $PWD
         git clone $REPO_URL -b $REPO_BRANCH2 openwrt
+        ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
+
+    - name: Clone LEDE source code
+      working-directory: /workdir
+      if: (github.event.inputs.branch == '1') || contains(github.event.action, 'branch')
+      run: |
+        df -hT $PWD
+        git clone $LEDE_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
     - name: Update & Install feeds
