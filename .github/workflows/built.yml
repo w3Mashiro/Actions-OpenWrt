@@ -87,7 +87,7 @@ jobs:
 
     - name: Clone LEDE source code
       working-directory: /workdir
-      if: (github.event.inputs.branch == '1') || contains(github.event.action, 'branch')
+      if: (github.event.inputs.branch == '4') || contains(github.event.action, 'branch')
       run: |
         df -hT $PWD
         git clone $LEDE_BRANCH openwrt
