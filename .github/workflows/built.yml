@@ -95,6 +95,15 @@ jobs:
 
     - name: Update & Install feeds
       run: cd openwrt &&./scripts/feeds update -a && ./scripts/feeds install -a
+      
+    - name: Load custom configuration
+      if: (github.event.inputs.ssh == 'false' && github.event.inputs.ssh  != 'true') || contains(github.event.action, 'ssh')
+      run: |
+        [ -e files ] && mv files openwrt/files
+        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+        chmod +x $DIY_P2_SH
+        cd openwrt
+        $GITHUB_WORKSPACE/$DIY_P2_SH
 
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0
