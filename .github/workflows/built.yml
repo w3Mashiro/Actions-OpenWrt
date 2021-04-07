@@ -28,7 +28,7 @@ env:
   REPO_BRANCH: v19.07.7
   REPO_BRANCH2: openwrt-21.02
   REPO_BRANCH3: v18.06.9
-  LEDE_BRANCH: https://github.com/coolsnowwolf/lede.git -b master
+  LEDE_BRANCH: https://github.com/openwrt/openwrt.git -b v17.01.7
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: .config
   DIY_P1_SH: diy-part1.sh
