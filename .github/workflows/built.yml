@@ -19,14 +19,14 @@ on:
         required: true
         default: 'true'
       branch:
-        description: '1 for openwrt-21.02, 2 for v21.02.0-rc2, 3 for v18.06.9, 4 for LEDE'
+        description: '1 for snapshot, 2 for v21.02, 3 for v18.06.9, 4 for LEDE'
         required: true
         default: '1'
 
 env:
   REPO_URL: https://github.com/openwrt/openwrt.git
-  REPO_BRANCH: v21.02.0-rc2
-  REPO_BRANCH2: openwrt-21.02
+  REPO_BRANCH: v21.02.0-rc3
+  REPO_BRANCH2: master
   REPO_BRANCH3: v18.06.9
   LEDE_BRANCH: https://github.com/coolsnowwolf/lede.git -b master
   FEEDS_CONF: feeds.conf.default
