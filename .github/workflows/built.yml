@@ -19,9 +19,9 @@ on:
         required: true
         default: 'true'
       branch:
-        description: '1 for snapshot, 2 for v21.02, 3 for v18.06.9, 4 for LEDE'
+        description: '1 for snapshot, 2 for v21.02.0-rc3, 3 for v18.06.9, 4 for LEDE'
         required: true
-        default: '1'
+        default: '2'
 
 env:
   REPO_URL: https://github.com/openwrt/openwrt.git
